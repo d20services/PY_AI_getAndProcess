@@ -12,6 +12,7 @@ from google.genai.types import (
     ToolCodeExecution,
 )
 import json
+import os
 # from database import store_processed_data
 
 
@@ -64,7 +65,7 @@ def process_with_gemini(invoice_file, order_file, reservation_dict, extra_charge
 
             Return only the structured JSON, no extra text or explanation.
 """
-    API_KEY = "AIzaSyB6xQTQXYHJMSQGKudhE5RPXhxFYvT6DWM"
+    API_KEY = os.environ['GEMINI_API_KEY']
     client = genai.Client( api_key=API_KEY)
     MODEL_ID = "gemini-2.5-flash"
     response = client.models.generate_content(
