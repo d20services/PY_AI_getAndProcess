@@ -4,12 +4,12 @@ import threading
 from queue import Queue
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-
+import os
 log_queue = Queue()
 
 
 def get_services():
-    creds = service_account.Credentials.from_service_account_file(os.environ['SHEETS_KEY'], scopes=SCOPES)
+    creds = service_account.Credentials.from_service_account_info(json.loads(os.environ['SHEETS_KEY']), scopes=SCOPES)
     sheets_service = build('sheets', 'v4', credentials=creds)
     drive_service = build('drive', 'v3', credentials=creds)
     folder_id = '1XGZJUbpNZk4OSW09puPCcdHtaeLFgmji'
